@@ -1,0 +1,10 @@
+This repository contains various notes and writings which I've collected over the years. They are typically lecture notes or essays produced during my undergraduate and masters days at Ottawa and Vancouver.
+
+The first entry is an essay written for R.J. McCann's course in Optimal Transport. I had been interested in symplectic and pseudo-riemannian geometry after studying Lie groups and arithmetic groups, 
+e.g. arithmetic symplectic group $G=Sp(Z^{2g}, \omega)$ and signature $(p,q)$ split orthogonal groups $G=SO(Z^{p,q})$.  R.J.McCann had introduced with Y.H.-Kim the study of 
+symplectic and split orthogonal structures into optimal transportation. Their main contribution in this direction was identifying the Ma-Trudinger-Wang condition as a pseudo-Riemannian
+curvature condition, namely the positively of so-called "cross-sectional curvature". This gave an interesting tensorial covariant definition of the MTW condition. We recall
+that (MTW) is essentially satisfied by transporting measures between spaces of nonnegative (positive) sectional curvature, e.g. round spheres, Alexandrov spaces, products of spheres, etc.. 
+There is also important characterization of the graphs of $c$-optimal transports (between spaces of equal dimension) as spacelike Lagrangian submanifolds of the product pseudo-Riemannian 
+space $X\times Y$ relative to the cross metric $g_{ij}:=d^2 c / dx_i dy_j$. Here $x_i$, $y_j$ are the coordinates on the distinct spaces $X, Y$, respectively. Thus the cross metric
+involves the mixed partial derivatives in the $X$ and $Y$ directions of $X\times Y$. 
