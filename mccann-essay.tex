@@ -1,0 +1,378 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{enumerate} 
+\usepackage{xypic}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsopn}
+\usepackage[all]{xy}
+
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{question}{Question}
+
+
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{exx}[thm]{Example}
+
+\newtheorem*{brenier}{Brenier theorem}
+\newtheorem*{deRham}{deRham's splitting theorem}
+
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+
+\newcommand{\fo}{\mathfrak{o}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\fB}{\mathfrak{B}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\fg}{\mathfrak{g}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\fH}{\mathfrak{H}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\del}{\partial}
+
+
+\title{Pseudo-riemannian structure in optimal transportation}
+\date{March 2014}
+
+\author{J. Martel}
+
+
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\section{Introduction} 
+
+%This essay is concerned with the relationship between pseudo-riemannian geometry and optimal transportation. The study of pseudo-riemannian geometry, beyond the simplest case of lorentz structures dominating general relativity, is a pathetically developed subject. Optimal transportation, on the other hand, is a rapidly developing field which appears nowhere near to exhausting itself, and within which fascinating and fundamental questions of geometry abound. It is therefore the great priviledge of pseudo-riemannian geometry to find it intrinsically connected with such an exciting field. 
+
+%The starting point for the authors' interest in optimal transportation was the discovery by [KM] and [KMW] that pseudo-riemannian structures naturally arise out of the Monge-Kantorovich problem on manifolds. More importantly, they show how several important technical conditions (so-called Ma-Trudinger-Wang conditions) guaranteeing regularity of Monge optimizers can be interpreted in terms of the geometry of the pseudo-riemannian metric. 
+
+Our principal objective when initiating this essay was to determine the extent to which those pseudo-riemannian metrics arising from the \cite{KM} and \cite{KMW} framework -- which are defined on the product $M \times M'$ of two equal dimensional manifolds $M,M'$ (possibly noncompact with boundary) -- could be characterized. The literature turned up \cite{BBI} and \cite{T} which we found useful. This essay's Theorem \ref{bbi} closely follows their original arguments and is the main content of section \ref{holonomy}. In section \ref{metrics} we present some foundational material on pseudo-riemannian differential geometry, in particular the Levi-Civita connection and holonomy. Finally, section \ref{calibrations} gives a self-contained treatment of pseudo-riemannian calibrations, and has followed the original sources \cite{M}, \cite{W}. Proposition \ref{cal2} and its proof reproduces a calculation initially found in \cite{W}.  
+
+%Calibrations establish the a priori nonobvious fact that on a given pseudo-riemannian manifold of the type constructed by \cite{KM}, \cite{KMW}, there is a finite maximum volume that an oriented spacelike $n$-submanifold of the possibly noncompact(!) product $M\times M'$ can occupy. The remainder of this introduction presents a basic example illustrating the interplay between pseudo-riemannian geometry (and auxiliary symplectic structures) and Brenier's theorem in optimal transportation. 
+
+\subsection{Lagrangian-spacelike graphs are gradients of convex functions}
+We now describe the most basic example of the relationship between pseudo-riemannian geometry (and symplectic geometry) and optimal transportation. Equip $\bR^{2n} \simeq \bR^{n,n} \simeq \bR^n \times \bR^n$ with the standard pseudo-euclidean metric and symplectic form $h,\omega$ having respective Gram matrices $\begin{pmatrix} 0 & I \\ I & 0\end{pmatrix}, \begin{pmatrix} 0 & I \\ -I & 0\end{pmatrix}.$ Our starting point is the elementary
+
+\begin{prop} The graph of a $C^1$ mapping $F:\bR^n \to \bR^n$ is $\omega$-lagrangian if and only if $F$ is the gradient of a function $f:\bR^n \to \bR$. Furthermore this graph is $h$-spacelike if and only if $f$ is convex. 
+\end{prop}
+\begin{proof}
+For the standard symplectic structure $\omega$ on $\bR^{2n}$, an $n$-dimensional subspace $H$ is lagrangian exactly if $\omega(x,y)=0$ for all $x,y\in H$. An arbitrary $n$-dimensional subspace $H$ of $\bR^{2n}$ can be represented as the image of a linear mapping $\phi_H:\bR^n \to \bR^{2n}$ defined by $$\phi_H(u)=\begin{pmatrix} X \\ Y  \end{pmatrix}u, $$ for some $n\times n$-matrices $X,Y$. Direct computation shows $H$ is lagrangian if and only if ${}^tXY={}^tYX$. 
+
+Now the tangent space to the graph of $F$ at $(x, Fx)$ coincides with the graph of the differential $dF_x$ in $T_{(x,Fx)}\bR^{2n} \simeq \bR^{2n}$, i.e. to the image of $\bR^n$ under the mapping $$\begin{pmatrix} I \\ dF_x \end{pmatrix}.$$ Hence this graph is lagrangian if and only if the matrix $(\del F_i / \del x_j)_{ij}$ is symmetric at every point $x$. This is equivalent to the $1$-form $\sum F_i dx_i$ on $\bR^n$ being closed, which of course is equivalent to being exact. Hence $F=\nabla f$ for some $f:\bR^n \to \bR$. 
+
+Similarly an $n$-dimensional subspace generated by $\begin{pmatrix} X \\ Y  \end{pmatrix}$ is $h$-spacelike (i.e. $h(x,x)>0$ for all nonzero $x$) if and only if ${}^tXY +{}^tYX$ is a positive-definite matrix. Therefore the graph of $\nabla f$ (i.e. $F$) is spacelike if and only if the Hessian $(\del^2 f / \del x_i \del x_j)_{ij}$ of $f$ is everywhere positive-definite. Or equivalently, if and only if $f$ is everywhere (strictly) convex. 
+\end{proof}
+
+The significance of lagrangian-spacelike graphs is tremendously amplified by the essential
+\begin{brenier}[c.f. \cite{V}, section 2.3]
+Let $\mu, \nu$ be Borel probability measures on $\bR^n$. Then there exists a convex function $u:\bR^n\to \bR \cup \{\infty\}$ such that the (almost-everywhere defined) gradient mapping $\nabla u:\bR^n \to \bR^n$ pushes the measure $\mu$ forward to $\nu$. Moreover the gradient mapping $\nabla u$ is the Monge-Kantorovich optimizer relative to the standard euclidean-squared distance cost function $c(x,y)=|x-y|^2/2$. 
+\end{brenier}
+
+Any true discussion of Brenier's theorem is beyond the competence of the present author, and well beyond the scope of this essay. 
+
+
+
+
+%Now say we have two Borel probability measures $\mu_+, \mu_-$ on $\bR^n$. The simplest instance of the Monge-Kantorovich problem (we refer the reader to [Villani, section 2.3] for details and terminology) in optimal transportation is to find a measure $\gamma$ on the product $\bR^n \times \bR^n$ having marginals $\mu_{\pm}$ which minimizes the total euclidean-squared cost function $c(x,y)=|x-y|^2/2$, i.e. minimizes $\int_{\bR^n \times \bR^n}c(x,y)d\gamma(x,y)$. Among the first fundamental observations of optimal transportation is to realize that the support of a minimizing measure $\gamma$ will be a \emph{cyclical-monotone} subset of $\bR^n\times \bR^n$. The characterization of cylically-monotone subsets is established by a theorem of Rockafeller which asserts that cyclically-monotone subsets are subdifferentials of proper (lower-semicontinous) convex functions. 
+
+%% Not sure how much optimal transportation to write here.   
+
+
+
+
+\section{Pseudo-Riemannian metrics}\label{metrics}
+\subsection{Involutions}
+There are several equivalent ways in which an oriented $n$-dimensional manifold $M$ can support a nondegenerate $(p,q)$-metric (with $p+q=n$). These include 
+\begin{enumerate}
+\item[(i)] $M$ must support a globally nonvanishing $p$-plane field (equivalently, a globally nonvanishing $q$-plane field); 
+\item[(ii)] the structure group of the tangent bundle $TM$ reduces to $SO(p,q)$ (equivalently, $SO(p) \times SO(q)$); 
+\item[(iii)] there exists a globally nonvanishing tangent bundle involution $j:TM \to TM$, $j^2=+1$, having $p$-dimensional $(+1)$-eigenspace distribution and $q$-dimensional $(-1)$-eigenspace distribution. 
+\end{enumerate}
+
+We briefly comment on these equivalences. There is no integrability conditions on the distributions of (i). If $\tau$ is a nonvanishing $p$-plane field over $M$ and $g$ is any riemannian metric, then we have a complimentary distribution $\tau^o$ defined pointwise by setting $\tau^o_p$ equal to the $g_p$-orthogonal complement of $\tau_p$. From a distribution and riemannian metric we define an involution $j$ on $TM$ by $j|_{\tau}=+1, j|_{\tau^o}=-1$. We obtain a $(p,q)$-metric $h$ by taking $h(X,Y)=g(jX,Y)$. Finally recall that $SO(p) \times SO(q)$ is a maximal compact subgroup of $SO(p,q)$, and hence deformation retracts onto its connected component (via the usual Iwasawa decomposition for real semisimple Lie groups).
+
+The obstructions to these equivalent properties are topological and depend on the characteristic classes (e.g. Stiefel-Whitney classes) of the tangent bundle of $M$. For our purposes it is suffices to recognize that products of $n$-dimensional manifolds have $(n,n)$-metrics. Moreover, parallelizable manifolds (e.g. tori, $S^3$, $S^3 \times S^1$) have arbitrary signature metrics. In dimension four, results of Hopf-Hirzebruch give exact algebraic-topological conditions for a closed oriented $4$-manifold to support $(2,2)$-metrics. We refer the reader to the second chapter of J. Bowden's thesis for a useful account \cite{Bowden}. 
+
+
+%One can smuggle structures born from riemannian geometry into the pseudo-riemannian setting (e.g. Levi-Civita connection, parallel translation, geodesics). However, when we try to probe these analogous (or stolen) structures with the pseudo-riemannian metric, we find we no longer honestly understand what they represent. In this section we consider basic questions on these imported structures.
+
+
+
+
+%\subsection{Canonical pseudo-riemannian measure}
+%Similiar to the riemannian setting, when an $n$-dimensional manifold $M$ supports a $(p,q)$-signature pseudo-riemannian metric $h$ one constructs a canonical volume measure $vol_h$ on $M$. In local coordinates $x_1, \ldots, x_n$ we form the associated gram matrix $(h(x_i, x_j))=(h_{ij})$. This symmetric matrix has a nonzero determinant of sign $(-1)^q$. Therefore we find $$vol_h:=\sqrt{(-1)^q \det(h_{ij})}dx_1 \wedge \cdots \wedge dx_n$$ is a nondegenerate positive volume form on $M$. In the pseudo-euclidean space this volume measure is proportional to Lebesgue measure on $\bR^{n,n} \simeq \bR^{2n}$. 
+
+%If $W$ is a $k$-dimensional submanifold of $(M, h)$, then the pullback metric on $W$ is possibly degenerate depending on whether or not every tangent space $T_w W \hookrightarrow T_w M $ is a nondegenerate subspace with respect to $h_w$. In the case that $W$ is indeed nondegenerate, of signature say $(p', q')$ with $p'+q'=k$, then the pullback metric induces a $k$-dimensional volume measure on $W$. One can therefore reasonably investigate $k$-dimensional volumes of nondegenerate $k$-dimensional submanifolds of a fixed signature $(p',q')$.   
+
+
+
+
+%An interesting observation due to Gromov is that these measures are uniquely characterized by two properties:
+%\begin{itemize}
+%\item(Monotonicity)
+%If $f: (M_1, g_1) \to (M_2, g_2)$ is a bijective $1$-Lipschitz mapping, then $vol_{g_1}(M_1) \geq vol_{g_2}(M_2)$, where $dim M_1=dim M_2$. 
+%\item(Normalization) The volume of the unit cube in $\bR^n$ equals $1$.
+%\end{itemize} 
+
+
+%% Embedding theorem of Clarke.
+
+%% Sketch: section on basic interpretations of differential geometric structures in pseudo-r. case. e.g. parallel translation, canonical volume measure, embedding theorem of Clarke. What is the most rigid motion between two (1,1)-planes P,Q and describing orthogonal projections. 
+
+
+%%% Restricted holonomy group: define. 
+
+
+%\subsection{Pseudo-riemannian energy}
+
+
+
+         
+
+\subsection{Holonomy}
+
+One can smuggle structures born from riemannian geometry into the pseudo-riemannian setting (e.g. Levi-Civita connection, parallel translation, geodesics). However, when we try to probe these analogous (stolen) structures with the pseudo-riemannian metric, we no longer honestly understand what they represent. 
+
+Now we present a very coarse treatment of the pseudo-riemannian Levi-Civita connection. There is a canonical linear connection $\nabla$ on $(M^{n,n},h)$ distinguished by two conditions: for vector fields $X,Y,Z$ we have 
+\begin{itemize}
+\item $\nabla_Zh(X,Y)=h(\nabla_ZX,Y)+ h(X,\nabla_ZY)$ (symmetry with respect to $h$); and 
+\item $\nabla_X Y - \nabla_Y X = [X,Y]$, where $[X,Y]=\frac{\partial}{\partial t}|_{t=0} d\phi^X_t(Y)$ and $\phi^X_t$ being the \emph{flow} of $X$.
+\end{itemize}
+Following riemannian geometric tradition we call $\nabla$ the Levi-Civita connection. There are several facets to $\nabla$. Computationally, $\nabla$ permits us to covariantly differentiate vector fields with respect to other vector fields (i.e. permits us a coordinate-independant means of measuring the infinitesimal variation relative to $h$ of a vector field along another vector field's flow lines). In local coordinates $x_1, \ldots, x_n$ with associated vector fields $\del_1, \ldots, \del_n$ (setting $\del / \del x_i=\del_i$), we have $\nabla_{\del_i}\del_j=\Gamma^k_{ij}\del_k$, with $\Gamma^k_{ij}$ being the usual Christoffel symbols. These symbols are directly computable in local coordinates from the metric $h=h_{ij}dx_i dx_j$ by the well known formulae $$\Gamma^k_{ij}=\frac{1}{2}h^{kl}(h_{il,j}+h_{lj,i}-h_{ij,l}).$$ As usual $(h^{ij})$ denotes the matrix inverse to $(h_{ij})$. 
+
+\begin{question}
+Are the functions $\{\Gamma_{ij}^k\}_{i,j,k}$ the Christoffel symbols of a riemannian metric?
+\end{question}
+
+Another aspect of $\nabla$ is that it defines a parallelism. Namely, for a given differentiable path $\gamma$ on $M$, we say a vector field $X$ is parallel along $\gamma$ if $\nabla_{\dot{\gamma}}X=0$. In local coordinates this is a second-order nonlinear ODE familiar from riemannian geometry. Of course, $\nabla_{\dot{\gamma}}\dot{\gamma}=0$ is the geodesic equation. A path $\gamma$ on $M$ permits us to define a family of linear isometries $P_{\gamma(t)}: T_{\gamma(0)}M \to T_{\gamma(t)}M$ where the image $P_{\gamma(t)}(v)$ of a tangent vector $v\in T_{{\gamma}(0)}M$ is the parallel translation of $v$ to $T_{\gamma(t)}M$. Observe that if $\bar{\gamma}$ is the path defined by $\bar{\gamma}(t):=\gamma(1-t)$ for $\gamma:[0,1]\to M$ then $P_{\bar{\gamma}}=P^{-1}_\gamma$. 
+
+If $\gamma$ is a closed loop at $p\in M$, then $P_\gamma$ defines a self-isometry of the tangent space at $p$. The group generated by all closed loops at $p$ in $M$ is the holonomy group $Hol_p$. It is a (possibly nonclosed and disconnected) subgroup of $SO(h_p)$. The identity component $Hol^o_p$ of $Hol_p$ is called the restrained (or, restricted) holonomy group. It is generated by parallel translation around nulhomotopic loops in $M$ (i.e. generated by $P_\gamma$ where $\gamma$ is a loop in $M$ which bounds a disk). This restrained holonomy group is the subject of \S\ref{holonomy}.     
+
+
+%This interpretation of $\nabla$ as a means to differentiating vector fields is just one of several viewpoints. For the topologist there is another characterization of the Levi-Civita connection in terms of principal fibre bundles that is interesting. To say the structure group of a pseudo-riemannian manifold $M^{n,n}$ has been reduced to $SO(n,n)$ means we can construct a principal $SO(n,n)$-fibre bundle $\pi:P \to M$ which we call the Witt-bundle. Specifically, the fibre over a point $x\in M$ consists of all $n$-frames for $T_xM$ which are additionally Witt bases, i.e. diagonalize the quadratic form to $dx_1^2 + \cdots - dx_n^2$. This is a locally trivial bundle, and is moreover said to be principal since the structure group $SO(n,n)$ acts simply transitively on every fibre (i.e. on Witt bases for $T_x M$ with metric $h_x$).
+
+%The tangent bundle $TP$ of the total space $P$ of this bundle has a canonical distribution corresponding to fibres, i.e. $\ker d\pi$. That is, those tangent directions parallel to fibres. These correspond to differentiable curves in $P$ which live in a single fibre. A linear connection in the sense of Ehresmann or Cartan (c.f. Chapters II, III of \cite{KN}) is a complimentary distribution $Q$ of $TP$ which (i) for every $u\in P$ has $Q_u$ transverse to $d\pi_u$, and hence gives us a splitting $TP=\ker d\pi \oplus Q$ and (ii) the distribution must be $SO(n,n)$-equivariant in the fibres, i.e. for $g\in SO(n,n)$ we must have $dR_g(Q_u)=Q_{g.u}$ for every $u\in P$, where $R_g$ is the fibre-automorphism corresponding to right multiplication by $g$ and $dR_g$ its differential. Given a linear connection $\Gamma$ (i.e. a distribution $Q$ satisfying the properties (i)-(ii)) we say a vector field $X$ on $P$ is horizontal if $X_u \in Q_u$ for every $u \in P$. 
+
+
+%Now given a differentiable path $\gamma:[0,1] \to M$, a horizontal lift $\tilde{\gamma}$ consists of a lifting of $\gamma$ to $P$ such that $\cdot{\tilde{\gamma}} $ is tangent for every time $t$.
+
+\subsection{A question on pseudo-euclidean orthogonal projections}\label{qqq}
+In this brief subsection we digress to explain a rather basic question on pseudo-riemannian holonomy which the author has thus far been unable to answer for himself. We think it illuminates some important distinctions between the riemannian and pseudo-riemannian setting. 
+
+Let $P,Q$ be two $(1,1)$-planes in the standard pseudo-euclidean space $(\bR^{n,n}, h)$. We have a canonical splitting $$\bR^{n,n}= Q \oplus Q^\perp, $$ and hence a canonical projection mapping $proj_Q: Q \oplus Q^\perp \to Q$. Seeing $P$ as a subspace of $\bR^{n,n}=Q\oplus Q^\perp$ we can restrict $proj_Q$ to obtain a linear mapping $proj_{Q,P}: P \to Q$. We can easily compute the pullback metric under this mapping. If we fix a Witt basis for $Q$, then $P$ can be represented as the graph of a linear mapping $P:Q \to Q^\perp$, namely as the graph of $$\begin{pmatrix} 1 & 0 \\ 0 & 1 \\ x_1 & x_2\end{pmatrix}$$ where $x_1, x_2 \in Q^\perp$. Pulling back the metric via $proj_{Q, P}$ to $P$ we find a Gram matrix $$\begin{pmatrix} 1 + h(x_1,x_1) & h(x_1,x_2) \\ h(x_1, x_2) & -1 + h(x_2, x_2)\end{pmatrix}.$$ Consequently the additive distortion of the projection mapping is measured by the Gram matrix $$\begin{pmatrix} h(x_1,x_1) & h(x_1,x_2) \\ h(x_1, x_2) &  h(x_2, x_2)\end{pmatrix}.$$ This leads us to the simple observation that if $x_1, x_2$ span a totally isotropic $2$-plane in $Q^\perp$ (or equivalently, if the image of $\phi_P:Q \to Q^\perp$ is totally isotropic) then the projection mapping $proj_{Q,P}$ is an isometry. Compare this with the riemannian setting where the orthogonal projection map between two equidimensional subspaces is an isometry if and only if the subspaces coincide. 
+
+Now suppose we have an $(n,n)$-signature pseudo-riemannian manifold $(M,h)$ isometrically embedded in some large dimensional $\bR^{N,N}$. This is possibly by \cite{C}. This means there is an embedding $f: M \to \bR^{D,D}$ where $h(X,Y)=h_{std}(df(X), df(Y))$ for all vector fields $X,Y$ on $M$. The Levi-Civita connection $\nabla$ on $\bR^{D,D}$ pulls back to the Levi-Civita connection $\nabla^M$ on the image of $M$ -- by uniqueness. Therefore parallel translation on the embedded manifold $M$ will appear as parallel translation with respect to the ambient pseudo-euclidean structure. 
+
+Let $\alpha:[0,1]\to M$ be a differentiable path on $M$ between two points $\alpha(0),\alpha(1)$. Set $P=T_{\alpha(0)}M$ and $Q=T_{\alpha(1)}M$. For every integer $N>0$ and $0\leq k \leq N$ let $P_{N,k}$ be the tangent space $T_{\alpha(k/N)}M$ to $M$ at $\alpha(k/N)$. Moreover let $pr_{N,k}$ be the orthogonal projection mapping -- as described above -- between the two $(n,n)$-planes $P_{(k-1)/N}, P_{k/N}$. Finally set $pr_{(N)}$ equal to the composition $pr_{N,N}\circ \cdots \circ pr_{N,1}.$ Then $pr_{(N)}$ is a linear mapping between $P$ and $Q$. 
+
+\begin{question}\label{qq}        
+Does the sequence of linear mappings $pr_{(N)}:P \to Q$ converge to an isometry as $N \to \infty$ ? 
+\end{question}
+
+We find it unclear whether or not $pr_{(N)}$ converges to a mapping at all, i.e. given a nonzero vector $v\in P$, does the sequence of vectors $pr_{(N)}(v)$ converge in $Q$ as $N \to \infty$? The analogous question in the riemannian setting is affirmative. This is described in Thurston's book (\cite{Th}, \S 3.6, pp. 166) and is used as an alternative description of parallel translation relative to the Levi-Civita connection. The authors attempt to prove the analogous statement was the motivation for Question \ref{qq}.  
+
+
+
+
+
+
+%In [O'Neill], the existence of the Levi-Civita connection is described as being recognized by some as a miracle of pseudo-riemannian geometry. We believe that this belief, while outrageous, points to a more serious issue concerning our conceptual understanding of the measures of pseudo-riemannian geometry.
+
+%Our connection $\nabla$ also provides us with a notion of \emph{parallelism}: we say a vector field $Z$ is \emph{parallel} along another vector field $X$ if $\nabla_XZ=0$. 
+
+
+
+
+
+\section{Neutral signature metrics with null-reducible holonomy}\label{holonomy}
+The results of \cite{KM}, \cite{KMW} on pseudo-riemannian geometry and optimal transportation spotlights manifolds $M$ with $(n,n)$-metric $h$ which are further endowed with a pair of transverse codimension-$n$ null foliations $\sF, \sF'$. Here \emph{null} means leaves are totally isotropic with respect to $h$, i.e. for all $x\in M$ the metric $h_x$ is identically zero on both $\sF_x$ and $\sF'_x$. More precisely, their results concern products $M=M' \times M''$, which evidently possess such $(n,n)$-structures. In this case, the transverse foliations are simply given by $M' \times \{pt\}$ and $\{pt\} \times M''$. 
+
+Several questions arise concerning $(n,n)$-manifolds with the remarkable property of possessing a pair of transverse null foliations. Given a single foliation $\sF$ on $M$ the obstructions to producing a transverse foliation are unclear.It is also a compelling question to find additional conditions which force the underlying manifold to split as a topological product. In riemannian geometry the precedent for this statement is: 
+
+\begin{deRham}
+If $(M,g)$ is a complete riemannian manifold with reducible linear holonomy representation at some point $p$, then $M$ is locally a riemannian product. If in addition $M$ is simply connected, then $M$ is globally a riemannian product $(M' \times M'', g' \times g'').$ 
+\end{deRham}  
+
+Unfortunately this author cannot provide a better reference than the opaque section IV.6 of the otherwise excellent \cite{KN}. Alternative proofs -- no more clearer -- are due to \cite{Wu} and depend on the Cartan-Ambrose-Hicks theorem which says that complete simply connected riemannian manifolds are characterized by how their riemannian curvature tensor varies under parallel translation.
+
+
+Returning to the pseudo-riemannian stage, we see that the manifolds arising from the \cite{KM}-\cite{KMW} framework can be largely distinguished by having null-reducible holonomy. Specifically, we have the following theorem of \cite{BBI} and \cite{T}:
+
+\begin{thm}\label{pot}
+Let $(M,h)$ be an $(n,n)$-signature pseudo-riemannian manifold. Suppose at some point $p\in M$ the restricted holonomy group $\mathrm{Hol}^o_p$ leaves invariant a pair of transverse totally isotropic codimension $n$ subspaces in $T_pM$. Then near $p$ there exists local coordinates $x_1, \ldots, x_n, y_1, \ldots, y_n$ on $M$ and a smooth function $\phi$ defined locally near $p$ such that the metric $h$ has the form $\sum(\del^2 \phi / \del x_i \del y_j) dx_i\otimes dy_j$ with $(\del^2 \phi / \del x_i \del y_j)$ nonsingular. 
+\end{thm}\label{bbi}
+
+\begin{proof}
+Let $E,E' \subset T_p M$ be totally isotropic transverse $n$-planes which are invariant under the restricted holonomy representation $Hol^o_p$. This means for $\gamma$ a null-homotopic loop based at $p$, and $v$ a tangent vector in $E$ (resp. $E'$), the parallel translate $P_\gamma v$ lies in $E$ (resp. $E'$). The parallel translates of $E,E'$ throughout $M$ generate a pair of distributions. These distributions are integrable: given vector fields $X,Y$ tangent to the distribution generated by all parallel translates of $E$, the covariant derivative $\nabla_X Y$ is again tangent to this distribution. Hence the difference $[X,Y]=\nabla_X Y - \nabla_Y X$ is also tangent. Therefore the parallel translates of $E,E'$ generate a pair of null transverse codimension $n$ foliations $\sF,\sF'$ on $M$. By construction each leaf is totally geodesic. 
+
+Now we take a sufficiently small neighborhood $U$ of $p$ in which our pair of foliations $(\sF, \sF')$ is trivialized. This means a coordinate system $x_1, \ldots, x_n, y_1, \ldots, y_n$ around $p$ where the vector fields $\del_i:=\del/\del x_i$ and $\del'_j:=\del'/\del y_j$ generate $\sF$ and $\sF'$ on $U$. In more detail, the level sets $\{x_1=const_1, \ldots, x_n=const_n\}$ in $U$ describe locally the leaves of $\sF$ around $p$. Likewise for level sets of $y_1, \ldots, y_n$ in $U$. There are two observations we need to make. The first is that -- since arising from local coordinates -- the Lie brackets of $\{\del_i, \del'_j\}_{i,j}$ all pairwise vanish. Consequently we have $\nabla_{\del_i}\del_j'=\nabla_{\del'_j}\del_i$ for all $i,j$. Leaves of $\sF, \sF'$ being parallel means, in particular, that $\nabla_{\del_i}\del_j' T \sF'$ and $\nabla_{\del'_j}\del_i \in T\sF$. Transversality of our foliations means both covariant derivatives vanish. Consequently the vector fields $\del_i$ are parallel along the leaves of $\sF'$ in the neigborhood $U$. Likewise, the $\del'_j$ are parallel along leaves of $\sF$ in $U$. 
+
+Secondly, the metric $h$ in these local coordinates is represented by $\begin{pmatrix}0 & A \\ {}^tA & 0 \end{pmatrix}$, where $a_{ij}=h(\del_i, \del'_j)$. Leaves of $\sF'$ being parallel means parallel translates of vectors tangent to leaves of $\sF'$ remain tangent. In particular, parallel translating the vector fields $\del_j'$ along the flow-lines $\del_i$ remains tangent to leaves of $\sF'$. Computationally this means the Christoffel symbols $\Gamma_{ij'}^k$ vanish, since $\Gamma_{ij'}^k$ is the coefficient of $\del_k$ in $\nabla_{\del_i} \del_j'$. Similarly, as the parallel translates of $\del_i$ along the flow of $\del_j'$ remain tangent to $\sF$, we have the vanishing of $\Gamma_{i'j}^{k'}$. In local coordinates, these symbols vanish exactly when $\del_k a_{ij}=\del_i a_{kj}$ and $\del'_k a_{ij}=\del'_i a_{kj}.$ Stare at these equations and we see they are integrable. So we can find a function $\phi$ defined on $U$ such that $\del_i \del_j'\phi =a_{ij}$ for all $i,j$. Moreover as we are free to choose our coordinates such that $A$ equals the identity matrix at $p$, we find that $\phi$ has a Taylor expansion at $p$ with $x_1y_1+\cdots+x_ny_n$ plus higher-order terms.   
+\end{proof}
+
+
+
+\begin{rem}
+The proof in \cite{BBI} shows a little more, namely that the riemannian curvature tensor $R$ of $h$ vanishes along the leaves of the foliations $\sF, \sF'$. Specifically if $X$ is a vector field tangent to the leaves of the foliation $\sF$, then for arbitrary vector fields $U,V$ on $M$ we have again $R(U,V)X$ tangent to $\sF$. To see this recall (\cite{Besse}, pp.290, \S 10.52) that if $\phi^U_t, \phi^V_t$ denote the flows of $U,V$ on $M$, and if $\lambda_t$ denotes the closed quadrilateral loop based at $p$ defined by $\lambda_t=\phi^V_{-t}\phi^U_{-t}\phi^V_t \phi^U_t(p),$ then $R(U,V)$ is the endomorphism at $T_pM$ defined by $\del_t|_{t=0} P_{\lambda_t}.$ This is the familiar interpretation of the curvature endomorphism as parallel translation around an infinitesimally small parallelogram. Therefore holonomy-invariance of leaves implies their invariance under all curvature endomorphisms $R(U,V)$. With the well known Bianchi-type identity $h(R(U,V)X,Y)=h(R(X,Y)U,V)$, we conclude that $R(X,Y)=0$ for all vector fields $X,Y$ tangent to $\sF$ (likewise $R$ vanishes on all pairs of vector fields tangent to $\sF'$). Note that we have used here the maximal total isotropy of each leaf with respect to the metric $h$. This shows the leaves of the foliations $\sF, \sF'$ are flat with respect to the induced connection. Thus within each leaf $\sF_x$, the holonomy of a tangent vector $v\in T_x\sF$ around any loop in $\sF_x$ is trivial. We remark that there is no induced metric structure (pseudo-riemannian or otherwise) on the leaves since they are totally isotropic with respect to $h$. 
+\end{rem}
+
+
+\begin{rem}
+The restrained holonomy representation $Hol^o_p$ can be immediately computed since the proof of Proposition IV.5.3 in \cite{KN} shows that $Hol^o_p$ is generated by parallel translations supported in neighborhoods $U$ trivializing the pair of foliations $(\sF, \sF')$ -- as in the proof of \ref{pot} above -- around rectangular loops tangent to the foliation pair $(\sF, \sF')$. Moreover flatness of the leaves means that we can choose our local trivialization such that $\{\del_i\}$ are parallel along the particular leaf $\sF_p$, and likewise $\{\del'_j\}$ parallel along $\sF'_p$. Then $Hol^o_p$ is seen to be the smallest connected subgroup of $SO(h_p)$ containing $\begin{pmatrix} {}^tA(q) & 0 \\ 0 & A^{-1}(q)\end{pmatrix}$ where $q\in U$. Check \cite{BBI} for details.  
+\end{rem}
+
+
+
+\subsection{Existence of global potential}
+
+Comparing to the \cite{KM}-\cite{KMW} framework, we find that the potential function $\phi$ arising in the theorem can be interpreted as a local cost function defined on neighborhoods of the leaves $\sF_p, \sF_p'$. We must make the humiliating admission that we do not know whether or not the leaves of the foliation $\sF$ are diffeomorphic (or isotopic). Furthermore we do not know whether the holonomy (in Haefliger's foliation sense) of any of the leaves are trivial. Our knowledge at this stage is very poor and almost entirely local.   
+
+However we do understand at least one global aspect of the situation. An additional result of \cite{T} permits us to easily determine the conditions under which a global potential function $\phi$ exists. The key point here is that the observation made in \cite{KM} and \cite{KMW} on the symplectic nature of the metric $h$ is in fact an essential feature. Namely 
+
+\begin{prop}
+A manifold $M$ supports a $(n,n)$-signature metric $h$ having a pair of parallel transverse null codimension $n$ foliations $\sF, \sF'$ if and only if $M$ supports a symplectic structure $\omega$ admitting a pair of transverse lagrangian foliations. Moreover these structures are in direct $1-1$ correspondence.
+\end{prop}
+\begin{proof}
+We begin with linear algebra. If $P,P'$ are transverse null $n$-planes in $(\bR^{n,n},h)$ then there are canonically defined projection maps $\pi: \bR^{n,n} \to P, \pi': \bR^{n,n} \to P'$, e.g. every vector $v$ has a unique expression in the form $p+p'$ with $p\in P, p' \in P'$. The linear mapping $\iota:=\pi - \pi'$ is an involution $\iota^2=1$ with the property that $$\omega(x,y):=h(\iota x, y)$$ is a nondegenerate alternating $2$-form on $\bR^{n,n}$. Now that the metric $h$ arises from a potential function $\phi$ means precisely that $\omega$ is closed, i.e. $\omega$ is symplectic. Concretely the operation amounts to replacing the matrix $\begin{pmatrix}0 & A \\ {}^t A & 0\end{pmatrix}$ with $\begin{pmatrix}0 & A \\ -{}^t A & 0\end{pmatrix}$. 
+
+Therefore a pair of transverse null foliations $\sF, \sF'$ on $(M^{n,n},h)$ generates a field of endomorphisms $$\iota=\iota_{\sF, \sF'}=\pi_{\sF}-\pi_{\sF'}$$ on $M$. Setting $\omega(\cdot, \cdot)=h(\iota \cdot, \cdot)$ gives us a global symplectic structure on $M$; the leaves of the foliations $\sF, \sF'$ being obviously lagrangian. From our previous theorem, we can find local coordinates $x_i, y_j$ in which $h=\sum (\del^2 \phi / \del x_i \del y_j) dx_i \otimes dy_j$ for some potential function $\phi$. In these coordinates we have the local expression $$\omega=\sum(\del^2 \phi / \del x_i \del y_j) dx_i \wedge dy_j.$$
+
+Conversely, given a symplectic structure $\omega$ having a pair of transverse null lagrangian foliations, a local coordinate expression for $\omega$ can be found such that $\omega = \sum b^{ij}dx_i \wedge dy_j$. The condition that $\omega$ be closed is $$\frac{\del b^{ij}}{\del x_k} - \frac{ \del b^{kj}}{\del x_i }=0= \frac{\del b^{ij}}{\del y_k} - \frac{ \del b^{ik}}{\del y_j }.$$ As before, these equations can be integrated locally to yield a potential function $\phi$ satisfying $b^{ij}=\del^2 \phi / \del x_i \del y_j$. Similarly we can define projection mappings $\pi, \pi'$ and an involution $\iota$ with $h(x,y):=\omega(\iota x, y)$ a nondegenerate $(n,n)$-signature pseudo-riemannian metric on $M$.  
+\end{proof}
+
+In our local coordinates $x_1, \ldots, x_n, y_1, \ldots, y_n$ the exterior de Rham differential $d$ splits as a sum $\del+\del'$ of differentials, where $\del f = \sum \del_if dx_i$ and $\del' f = \sum \del'_j f dy_j$ for smooth functions $f: M \to \bR$. As usual, $d^2=(\del + \del')^2=0$ and $\del^2=\del'^2=0$. From these elementary remarks we can easily determine when a \emph{global} potential function $\phi: M \to \bR$ exists in Theorem \ref{pot}. 
+
+\begin{prop}
+A pseudo-riemannian manifold $(M^{n,n},h)$ satisfying the hypotheses of Theorem \ref{pot} admits a global potential function $\phi: M\to \bR$ only if $M$ is non-closed (i.e. either is noncompact or has boundary) and the corresponding symplectic form $\omega_{h, \iota}$ is nullcohomologous in $H^2_{deRham}(M, \bR)$.   
+\end{prop}
+\begin{proof}
+The proposition is well known to symplectic geometers (and scores of other disciplines). If $\omega_{h,\iota}=\del \del' \phi$, then because $\del \del'= d\del'$, we find the form $\omega_{h,\iota}$ is exact. From Stokes' theorem the form cannot be nondegenerate on a closed manifold, since otherwise we'd have $\int_M \omega^n >0$ (nondegeneracy) while $\int_M d(\del' \phi \wedge \omega^{n-2})=\int_{\del M}\del' \phi \wedge \omega^{n-2}=0$ (Stokes' theorem and fact that $\omega^n=(d\del'\phi)^n=d(\del'\phi \wedge \omega^{n-2})$ plus the hypothesis that boundary of $M$ is empty).
+\end{proof}
+
+\begin{rem}
+The results of this section have parallels with the study of Kahler manifolds, e.g. Bochner \cite{Boc} and Calabi \cite{Cal}, which the author is anxious to investigate in the future.  
+\end{rem}
+
+
+
+\begin{rem}
+
+Symplectic manifolds admitting lagrangian foliations is a basic phenomenon in the study of Hitchin's integrable systems. In this setting, all regular leaves of the foliations are lagrangian tori (by the Arnold-Liouville theorem) and are almost-always singular at some points (according to critical points predicted by Morse theory). The question of which of these admits a transverse integrable system is not, as far as the author can tell, a wellknown aspect of the theory.  
+
+
+\end{rem}
+
+
+
+\section{Pseudo-riemannian calibrations}\label{calibrations}
+In this section we return to linear algebraic properties of the pseudo-euclidean space. A basic aspect relating pseudo-riemannian geometry and optimal transport are so-called calibrations (see \S\ref{cal1} and Proposition \ref{cal2} below). As Mealy \cite{M} has shown, calibrations are rather sparse on an $(n,n)$-signature manifold and exist only for spacelike $(n,0)$-submanifolds which are positively space-oriented. In \ref{cal2} we very mildly extend the pointwise computation of Warren \cite{W} to the global setting and point out that the necessary pointwise inequality can be expressed in terms of a very natural global volume form on $M \times M'$ arising from the leafwise volume forms.     
+
+\subsection{Pseudo-euclidean calibrations}\label{cal1}
+In the pseudo-euclidean space $(\bR^{n,n},h)$, let $e_1, \ldots, e_n, f_1, \ldots, f_n$ be a fixed Witt basis. This is a basis for which the metric $h$ has Gram matrix $\begin{pmatrix}I_n & 0\\ 0& -I_n  \end{pmatrix}$. A choice of Witt basis is somewhat ambiguous. The quadratic nature of $h$ means that changing signs $\pm e_i, \pm f_j$ leaves the Gram matrix fixed.  Fixing a global orientation $\mathfrak{o}$ on $\bR^{n,n}$ and an orientation $\mathfrak{o}'$ on a fixed reference $(n,0)$-plane $\bR \tilde{e}:=\bR(e_1, \ldots, e_n)$ is one remedy. Of course, $\fo, \fo'$ determine an orientation on the standard reference $(0,n)$-plane spanned by the $f_j$'s. 
+
+Notice that if $P$ is any other $(n,0)$-plane, then the canonical projection $\bR \tilde{e} \oplus \bR \tilde{e}^\perp \to \bR \tilde{e}$ remains full rank when restricted to $P$, and hence maps $P$ isomorphically (!but not isometrically) onto $\bR \tilde{e}$. We can therefore pull back the orientation $\mathfrak{o}'$ to $P$. Specifically this means that a basis of $P$ will be positively oriented exactly if its projection to $\bR \tilde{e}$ is positively $\mathfrak{o}'$-oriented.
+
+The linear isometries of $(\bR^{n,n},h)$ which preserve both $\mathfrak{o}, \mathfrak{o}'$ form a connected noncompact real Lie group $SO(n,n)_o$ (the identity component of the orthogonal group of $h$). One immediately finds $SO(n,n)_o$ acts simply transitively on positively $(\fo, \fo')$-oriented Witt bases. 
+
+Let $Gr_{p,q}(\bR^{n,n})$ be the grassmannian of $(p,q)$-planes in $\bR^{n,n}$, i.e. $(p+q)$-dimensional subspaces $P$ such that $h|_{P\times P}$ has signature $(p,q)$. Again one sees that $SO(n,n)$ acts transitively on $Gr_{p,q}$ with stabilizer $SO(p,q)\times SO(n-p,n-q)$. The orbit of the connected component $SO(n,n)_o$ is however not so easy to directly identify. For $0\leq p,q \leq n$ but $(p,q) \neq (0,n), (n,0)$ it happens that $P, P^{op}$ both lie in the same $SO(n,n)_o$ orbit, where $P,P^{op}$ denote the same underlying plane but with opposite orientations (compare with proof of Proposition \ref{cal} below). This is an irritating feature of mixed-signature grassmannians. Nonetheless we will try to suffer it and denote by $Gr_{p,q}^+:=Gr_{p,q}^+(\bR^{n,n})$ the $SO(n,n)_o$-orbit of the oriented $(p,q)$-plane $\bR(e_1, \ldots, e_p, f_1, \ldots, f_q)$.  
+
+Forgetting the metric $h$, recall the usual grassmannian $\tilde{Gr}_{p+q}\bR^{2n}$ of oriented $(p+q)$-planes in $\bR^{2n}$, a \emph{compact} homogeneous space diffeomorphic to $$SL_{2n}\bR / (SL_{p+q}\bR \times SL_{2n-p-q}\bR) \simeq SO(2n) / (SO(p+q) \times SO(2n-p-q)).$$ Fixing orientation form $\fo$, $SO_o(n,n)$ canonically embeds into $SL_{2n}\bR$, and we can naturally embed $Gr_{p,q}^+$ into $\tilde{Gr}_{p+q}\bR^{2n}$. However $Gr_{p,q}^+$ sits as an \emph{open} subvariety -- positive- and negative-definiteness being open polynomial conditions. So $Gr_{p,q}^+$ is noncompact. 
+
+%Question: How can we establish noncompactness directly from our description of $Gr^+_{p,q}$ as homogeneous space? 
+
+Given an oriented $(p,q)$-plane $P$ in $Gr_{p,q}^+$, let $x_1, \ldots, x_p, y_1, \ldots, y_q$ be any Witt basis and map $P$ to the wedge $x_1 \wedge \cdots \wedge y_q$ in the $(p+q)$-th exterior power $\wedge^{p+q} \bR^{n,n}$ of $\bR^{n,n}$. This is the well-known Plucker embedding $\rho: Gr_{p,q}^+ \hookrightarrow \wedge^{p+q} \bR^{n,n}$. Notice that a subspace, equipped with opposite orientations (and hence corresponding to distinct elements in $Gr^+$) get mapped to antipodal points by the Plucker map. An explicit description of the image of the Plucker embedding is not possible, the image being notoriously complicated. In general, this Plucker image is nonconvex in $\wedge^k \bR^n$, e.g. $Gr_2^o \bR^4$ is found to be isometric to a product of two $2$-spheres of radius $1/ \sqrt{2}$. 
+
+Remembering the metric $h$, we obtain a metric $\wedge^{p+q} h:=|| \cdot ||_h^2$ on the exterior algebra by the formula $$||x_1 \wedge \cdots \wedge x_{p+q}||_h^2=\det (h(x_i, x_j)).$$ On $(p,q)$-planes the determinant quantity has sign $(-1)^q$. Thus to obtain a real square root we may choose to change the sign on the determinant. 
+
+The business of calibrations begins with linear functionals $\phi \in (\wedge^{p+q})^*$ and determining whether or not any level sets $\{\phi=\mathrm{const}\}$ (affine hyperplanes) support the Plucker-image of $Gr^+_{p,q}$. Nonconvexity and noncompactness of the Plucker images make this a nontrivial condition. In the remainder of this section we will be concerned mainly with a weak form of calibration: we will not require that our affine hyperplanes intersect the Plucker-image, but only that this image lies properly in one of the halfspaces determined by $\phi$. Equivalently, we are looking for linear functionals $\phi$ on $\wedge^{p+q}$ which have either a nonzero infimum or finite supremum on the Plucker-image. The determination of which grassmannians can be calibrated is due to Mealy \cite{M}: 
+
+\begin{prop}\label{cal}
+Among all $0 \leq p,q \leq n$, the only grassmannians $Gr_{p,q}^+$ of $\bR^{n,n}$ which can be calibrated are $Gr_{n,0}^+$ and $Gr_{0,n}^+$.
+\end{prop} 
+\begin{proof}
+For concreteness we will limit ourselves to establishing that $Gr^+_{1,1} \bR^{2,2}$ cannot be calibrated. The general case essentially reduces to this setting. Thus for arbitrary $\phi \in (\wedge^{1+1} \bR^{2,2})^*$ we have two claims on the Plucker-image of $Gr^+_{1,1}$ in $\wedge^2$: 
+\begin{enumerate}
+\item[(i)] the functional vanishes on the Plucker-image; and 
+\item[(ii)] the functional does not have a finite upper bound on the same Plucker image.  
+\end{enumerate}
+
+%Fix a Witt basis $e_1, e_2, f_1, f_2$ for $\bR^{2,2}$.
+
+We first establish (i). Fix a Witt basis $e_1, e_2, f_1, f_2$ for $\bR^{2,2}$ and define $\xi(\theta)$  to be $(\cos \theta \cdot e_1 + \sin \theta \cdot e_2)\wedge f_1$. Evidently $\xi(\theta)$ describes a smooth cycle in the Plucker-image of $Gr^+_{1,1}$. More specfically, we have $\xi(\pi)=-\xi(0)$ and hence we have a cycle between antipodal points in $\wedge^2$. Consequently the linear functional $\phi$ vanishes along this cycle. 
+
+Now we establish (ii). The argument we present is wellknown as a `first-cousin principle' (c.f. \cite{HL}, \cite{M}). Suppose $\xi$ is a maximum value for $\phi$ on $Gr^+_{1,1}$. Let $e_1, f_1$ be a Witt basis for $\xi$ and extend to a Witt basis $e_1, e_2, f_1, f_2$ for $\bR^{2,2}$. Consider $\xi(\theta)=(\cosh \theta \cdot e_1 + \sinh \theta \cdot f_2)\wedge f_1$. Then $\xi(\theta)$ desribes a $1$-parameter path in $Gr^+_{1,1}$. By hypothesis $\phi(\xi(\theta))$ has a maximum at $\theta=0$. Hence $$\frac{\del}{\del \theta}|_{\theta=0} \phi(\xi(\theta))=0.$$ By linearity $\phi(\xi(\theta))=(\cosh \theta)\phi(\xi) + (\sinh \theta) \phi(f_2\wedge f_1)$. Differentiating, this implies that actually $\phi(f_2 \wedge f_1)$ vanishes. Hence $\phi$ restricts to $\cosh \theta$ along $\xi(\psi)$. Contradiction.     
+\end{proof}
+
+%% The situation is somewhat disappointing -- but is there a remedy?
+
+
+Thus except for purely spacelike or timelike grassmannians, i.e. $(n,0)$ or $(0,n)$-submanifolds, the search for linear calibrations is hopeless. On the other hand, the exhibition of calibrations in the remaining cases is not entirely trivial. We present below a family of marvelous calibrations due to Warren \cite{W}. 
+
+%\begin{exx}[Pseudo-euclidean Wirtinger inequality]
+%In the standard Witt coordinates $e_1, \ldots, e_n, f_1, \ldots, f_n$ on the pseudo-euclidean space $\bR^{n,n}$ consider the involution $\tau=\begin{pmatrix} 0 & I_n \\ I_n & 0\end{pmatrix}$. Let $\tilde{e}=e_1 \wedge \cdots \wedge e_n, \tilde{f}=f_1\wedge \cdots \wedge f_n \in \wedge^n \bR^{n,n}$. Then for abitrary $\xi \in Gr_{n,0}^+ \subset \wedge^n \bR^{n,n}$ we have $$(-1)^n h(\xi \wedge \tau \xi, \tilde{e} \wedge \tilde{f}) \geq 1,$$ with equality if and only if $\xi, \tau \xi$ are $h$-orthogonal.
+%\end{exx}
+
+
+\subsection{Calibrations on space-oriented pseudo-riemannian manifolds}\label{cal2}
+Thus far our discussion of calibrations has been linear algebra in the pseudo-euclidean space $\bR^{n,n}$. Now we move to the global setting of a pseudo-riemannian manifold $(M^{n,n},h)$. A differential $k$-form $\alpha$ on $M$ is, of course, a tensor which for every point $x\in M$ gives a linear functional $\alpha_x:\wedge^k T_xM \to \bR$. We are interested in the question of exhibiting \emph{closed} forms $\alpha$ which are pointwise calibrations. From Proposition \ref{cal} we know that there is only hope in identifying $n$-forms on $M^{n,n}$ which calibrate certain positively-oriented spacelike $n$-dimensional subvarieties. Specifically fix a space-orientation $n$-form $\sigma$ on $M$. Then a spacelike $n$-dimensional subvariety $P$ of $M$ will be $\sigma$-oriented if $\sigma_x>0$ on $T_x P$ for every $x\in P$.  
+
+\begin{dfn} Let $(M^{n,n},h)$ be pseudo-riemannian with a space-orientation $n$-form $\sigma$. A closed $n$-form $\alpha$ is a \emph{calibration} if we have $$\alpha(\xi) \geq ||\xi||_h,$$ for all $\sigma$-oriented spacelike $n$-plane fields $\xi$ on $M$. 
+\end{dfn}
+
+\begin{rem} We insist that calibrating forms be closed. Indeed, if $\alpha$ is a closed calibrating form for $(M,h,\sigma)$ and $P$ is any closed spacelike subvariety, then $\int_P \alpha$ is actually a homological invariant. Specifically, if $P'$ is homologous to $P$ in $M$ (meaning there is some $(n+1)$-subvariety $W$ with $\del W = P-P'$) then Stokes' theorem shows $\int_P \alpha = \int_{P'} \alpha$. Consequently we find that there is an upperbound on the possible volume (with respect to the canonical $n$-dimensional volume measure arising from $h$) of any subvariety representing the homology class $[P]$. For further details we refer the reader to [HL]. Moreover, one can easily assemble non-closed calibrating $n$-forms via a direct partition-of-unity argument. 
+
+\end{rem}
+
+We now present an interesting family of calibrations which arise on particular pseudo-riemannian manifolds. Our discussion closely follows \cite{W}. 
+
+Let $M$ and $M'$ be $n$-dimensional manifolds (possibly noncompact and with boundary) having volume forms $\Omega=\phi dx_1 \wedge \cdots \wedge dx_n$ and $\Omega'=\phi' dy_1 \wedge \cdots \wedge dy_n$. Thus $\phi, \phi'$ are nonvanishing smooth functions on $M,M'$. Let $h=\begin{pmatrix} 0&A \\ {}^tA & 0\end{pmatrix}$ be some $(n,n)$-metric on the product $V=M \times M'$. Using the canonical projections $p,p':V \to M, M'$ we let $\Omega, \Omega'$ (formally, we are referring to $p^*\Omega, p'^* \Omega'$) denote their pullbacks under $p,p'$ on $V$. Take $\sigma=p^*dx+p'^*dy$ to be our space-orientation $n$-form on $V$. Following Warren's argument in \cite{W}, we can determine the extent to which $(\Omega+\Omega')/2$ is a calibration for $\sigma$-oriented spacelike $n$-submanifolds of $V$.
+
+Let $\xi$ be a $\sigma$-oriented spacelike tangent $n$-plane at a point $p=(p,p')$ on $V$. Then the projection of $\xi$ to $T_p M$ has full rank, and hence we can take a basis for $\xi$ of the form $$\xi_i = \del_{x_i}+w_i^j \del_{y_j},$$ with Einstein summation being implied. Set $W=(w_i^j)$. If $A=(A_{kl})$, then we find $$h(\xi_i, \xi_k)=w_i^j A_{kj}+w_k^l A_{il}.$$ We recognize $w_i^j A_{kj}$ as the $ik$-th entry of $W{}^tA$. Consequently the pullback metric on the tangent plane $\xi$ has the form $W {}^t A + A {}^t W$. Therefore $$||\xi||^2_h= \det(A {}^t W + W {}^tA).$$
+
+Direct computation shows $(\Omega+\Omega')(\xi)$ to equal $$\phi(p) \del_{x_1}\wedge \cdots \wedge \del_{x_n}+ \phi'(p')(\det W) \del_{y_1}\wedge \cdots \wedge \del_{y_n}.$$
+
+The hypothesis that $\xi$ is spacelike means $h|_{\xi}$ is positive definite. Consequently we find both $W{}^tA, A{}^tW$ are positive-definite (but not necessarily symmetric), where we say $Q\in GL_n \bR$ is positive-definite if $Q_{ij}x^ix^j>0$ for all nonzero $x\in \bR^{n}$. We now appeal to a fascinating `reverse' Cauchy-Schwartz inequality asserting the \emph{convexity} of $\det^{1/n}$ on those positive-definite matrices in $GL_n$ (see Lemma 3.1 in \cite{W}). Specifically the inequality says $$\det(A{}^tW)\geq \det(\frac{A{}^t W + W{}^t A}{2}),$$ with equality if and only if $A{}^t W$ is symmetric.  
+
+Now $(\Omega+\Omega')/2$ will be a calibration if and only if the inequality $$(\phi+\phi' \det W)/2 \geq \sqrt{\det A} \sqrt{\det W}$$ holds at all points $p=(p,p')$ on $V$ and $\sigma$-oriented spacelike tangent $n$-planes $W$. 
+
+This is a calculus problem: we are looking for conditions on $a,b>0$ such that the inequality $(a+bx) \geq 2c \sqrt{x}$ holds for fixed $c>0$ and arbitrary $x>0$. Strict concavity of $\sqrt{x}$ means $$\frac{c}{\sqrt{x_0}} \cdot x + c \sqrt{x_0} \geq 2c \sqrt{x}$$ for any $x,x_0,c>0$. And therefore we find $a+bx \geq 2c \sqrt{x}$ so long as $a \geq c^2/b$.  
+
+This discussion establishes
+\begin{prop}\label{cal2} Let $M,M'$ be as above with volume forms $\Omega=\phi dx, \Omega'=\phi'dy$. Let $V=M \times M'$ have pseudo-riemannian metric $h=\begin{pmatrix} 0&A \\ {}^tA & 0\end{pmatrix}$ in local coordinates and space-orientation form $\sigma=p^*dx+p'^*dy$. Then the closed $n$-form $(\Omega+\Omega')/2$ is a calibration for $(V,h,\sigma)$ so long as we have $$ \phi(p) \phi'(p') \geq \det A$$ for all $p=(p,p')$ on $V$.
+\end{prop}
+
+We remark that Proposition \ref{cal2} can be slightly rephrased. The volume forms $\Omega, \Omega'$ on $M,M'$ yield a global volume form $p^*\Omega \wedge p'^* \Omega'$ on the product $V$. Then the closed $n$-form is a calibration depending on whether the product volume form $p^*\Omega \wedge p'^* \Omega'$ pointwise dominates the canonical volume form of $h$. 
+
+
+
+%The existence of a calibration means that the following problem is well-posed: for a given homology class $H_n(W; \bZ)$ investigate those volume-maximizing $\sigma$-oriented spacelike $n$-dimensional representative subvarieties.
+
+
+
+
+
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}
